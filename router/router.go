@@ -2,6 +2,7 @@ package router
 
 import (
 	"mygram-api/controllers"
+	"mygram-api/middlewares"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,16 +18,17 @@ func StartApp() *gin.Engine {
 	}
 
 	// Photo
-	// photoRouter := r.Group("/photos")
-	// {
-	// 	photoRouter.GET("/", controllers.PhotoGetAll)
-	// 	photoRouter.GET("/:photoId", controllers.PhotoGet)
-	// 	photoRouter.POST("/", controllers.UploadPhoto)
-	// 	photoRouter.PUT("/:photoId", controllers.UpdatePhoto)
-	// 	photoRouter.DELETE("/:photoId", controllers.DeletePhoto)
-	// }
+	photoRouter := r.Group("/photos")
+	{
+		photoRouter.Use(middlewares.Authentication())
+		photoRouter.GET("/", controllers.PhotoGetAll)
+		photoRouter.GET("/:photoId", middlewares.PhotoAuthorization(), controllers.PhotoGet)
+		// photoRouter.POST("/", controllers.UploadPhoto)
+		// photoRouter.PUT("/:photoId", controllers.UpdatePhoto)
+		// photoRouter.DELETE("/:photoId", controllers.DeletePhoto)
+	}
 
-	// // Comment
+	// Comment
 	// commentRouter := r.Group("/comments")
 	// {
 	// 	commentRouter.GET("/", controllers.CommentGetAll)
@@ -41,7 +43,7 @@ func StartApp() *gin.Engine {
 	// {
 	// 	socmedRouter.GET("/", controllers.SocmedGetAll)
 	// 	socmedRouter.GET("/:socmedId", controllers.SocmedGet)
-	// 	socmedRouter.POST("/", controllers.AddSocmed)
+	// 	socmedRouter.POST("/", controllers.PostSocmed)
 	// 	socmedRouter.PUT("/:socmedId", controllers.UpdateSocmed)
 	// 	socmedRouter.DELETE("/:socmedId", controllers.DeleteSocmed)
 	// }

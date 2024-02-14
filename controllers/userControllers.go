@@ -13,7 +13,7 @@ var (
 	appJSON = "application/json"
 )
 
-func userRegister(c *gin.Context) {
+func UserRegister(c *gin.Context) {
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)
 	_, _ = db, contentType

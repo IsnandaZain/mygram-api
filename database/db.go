@@ -15,7 +15,7 @@ var (
 	user     = "postgres"
 	password = "10051998"
 	dbPort   = "5432"
-	dbname   = "simple-api"
+	dbname   = "mygram-api"
 	db       *gorm.DB
 	err      error
 )
