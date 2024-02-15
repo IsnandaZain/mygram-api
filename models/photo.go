@@ -1,5 +1,9 @@
 package models
 
+import (
+	"gorm.io/gorm"
+)
+
 type Photo struct {
 	GormModel
 	Title    string    `gorm:"not null" json:"title" form:"title"`
@@ -8,4 +12,8 @@ type Photo struct {
 	Comments []Comment `gorm:"constaint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"comments"`
 	UserID   uint
 	User     *User
+}
+
+func (p *Photo) GrabUserData(tx *gorm.DB) {
+	tx.First(&p.User, "id=?", p.UserID)
 }

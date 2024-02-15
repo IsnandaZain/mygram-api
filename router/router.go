@@ -23,30 +23,31 @@ func StartApp() *gin.Engine {
 		photoRouter.Use(middlewares.Authentication())
 		photoRouter.GET("/", controllers.PhotoGetAll)
 		photoRouter.GET("/:photoId", middlewares.PhotoAuthorization(), controllers.PhotoGet)
-		// photoRouter.POST("/", controllers.UploadPhoto)
+		photoRouter.POST("/", controllers.UploadPhoto)
 		// photoRouter.PUT("/:photoId", controllers.UpdatePhoto)
 		// photoRouter.DELETE("/:photoId", controllers.DeletePhoto)
 	}
 
 	// Comment
-	// commentRouter := r.Group("/comments")
-	// {
-	// 	commentRouter.GET("/", controllers.CommentGetAll)
-	// 	commentRouter.GET("/:commentId", controllers.CommentGet)
-	// 	commentRouter.POST("/", controllers.PostComment)
-	// 	commentRouter.PUT("/:commentId", controllers.UpdateComment)
-	// 	commentRouter.DELETE("/:commentId", controllers.DeleteComment)
-	// }
+	commentRouter := r.Group("/comments")
+	{
+		commentRouter.Use(middlewares.Authentication())
+		commentRouter.GET("/", controllers.CommentGetAll)
+		commentRouter.GET("/:photoId", controllers.CommentGet)
+		commentRouter.POST("/:photoId", controllers.PostComment)
+		commentRouter.PUT("/:commentId", middlewares.CommentAuthorization(), controllers.UpdateComment)
+		commentRouter.DELETE("/:commentId", middlewares.CommentAuthorization(), controllers.DeleteComment)
+	}
 
 	// // Social Media
-	// socmedRouter := r.Group("/socmed")
-	// {
-	// 	socmedRouter.GET("/", controllers.SocmedGetAll)
-	// 	socmedRouter.GET("/:socmedId", controllers.SocmedGet)
-	// 	socmedRouter.POST("/", controllers.PostSocmed)
-	// 	socmedRouter.PUT("/:socmedId", controllers.UpdateSocmed)
-	// 	socmedRouter.DELETE("/:socmedId", controllers.DeleteSocmed)
-	// }
+	socmedRouter := r.Group("/socmed")
+	{
+		socmedRouter.GET("/", controllers.SocmedGetAll)
+		socmedRouter.GET("/:socmedId", controllers.SocmedGet)
+		socmedRouter.POST("/", controllers.PostSocmed)
+		socmedRouter.PUT("/:socmedId", middlewares.SocmedAuthorization(), controllers.UpdateSocmed)
+		socmedRouter.DELETE("/:socmedId", middlewares.SocmedAuthorization(), controllers.DeleteSocmed)
+	}
 
 	return r
 }
