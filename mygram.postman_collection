@@ -1,0 +1,993 @@
+{
+	"info": {
+		"_postman_id": "fa79d1b0-9441-46c6-8fc7-d242cb34f9a8",
+		"name": "Hacktive",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12678174"
+	},
+	"item": [
+		{
+			"name": "OrderAPI",
+			"item": [
+				{
+					"name": "getOrder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8080/orders/8",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderedAt\": \"2019-11-09T21:21:46+00:00\",\r\n    \"customerName\": \"Isnanda\",\r\n    \"items\": [\r\n        {\r\n            \"itemCode\": \"123\",\r\n            \"description\": \"iPhone Max\",\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/orders",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllOrder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8080/orders",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrder",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderedAt\": \"2019-11-09T21:21:46+00:00\",\r\n    \"customerName\": \"Medita Ndut\",\r\n    \"items\": [\r\n        {\r\n            \"itemCode\": \"123\",\r\n            \"description\": \"iPhone 13 Pro\",\r\n            \"quantity\": 1,\r\n            \"orderID\": 8\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/orders/8",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOrder",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8080/orders/6",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SimpleAPI",
+			"item": [
+				{
+					"name": "userRegister",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"meditakurniaa@gmail.com\",\r\n    \"full_name\": \"Medita Kurnia\",\r\n    \"password\": \"Naruto12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/users/register",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userLogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"isndmz@gmail.com\",\r\n    \"password\": \"Shinichy12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/users/login",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImlzbmRtekBnbWFpbC5jb20iLCJpZCI6MX0.2HHt3IfHxW8SFSFZdZ06lLb62B9NbD3yIpYsliBiWVk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Bantal Keren\",\r\n    \"description\": \"Bantal Keren Nanda\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/products",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImlzbmRtekBnbWFpbC5jb20iLCJpZCI6MX0.2HHt3IfHxW8SFSFZdZ06lLb62B9NbD3yIpYsliBiWVk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Bantal Keren 1\",\r\n    \"description\": \"Description baru\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/products/1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MyGram API",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "userRegister",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"isnandamz98\",\r\n    \"email\": \"isndmz@gmail.com\",\r\n    \"password\": \"Naruto12345\",\r\n    \"age\": 9\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:8080/users/register",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userLogin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"isnandamz98\",\r\n    \"password\": \"Naruto12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:8080/users/login",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Photo",
+					"item": [
+						{
+							"name": "photoGetAll",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjksImVtYWlsIjoiaXNuZG16QGdtYWlsLmNvbSIsImlkIjozLCJ1c2VybmFtZSI6ImlzbmFuZGFtejk4In0.OTEAepPGaQCwi5bySprj9JNoP3uwmBMDibI8125JO2c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:8080/photos",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "photoGet",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjksImVtYWlsIjoiaXNuZG16QGdtYWlsLmNvbSIsImlkIjozLCJ1c2VybmFtZSI6ImlzbmFuZGFtejk4In0.OTEAepPGaQCwi5bySprj9JNoP3uwmBMDibI8125JO2c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:8080/photos/9",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"photos",
+										"9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "photoUpload",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjksImVtYWlsIjoiaXNuZG16QGdtYWlsLmNvbSIsImlkIjozLCJ1c2VybmFtZSI6ImlzbmFuZGFtejk4In0.OTEAepPGaQCwi5bySprj9JNoP3uwmBMDibI8125JO2c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "IVE Liz Beautiful",
+											"type": "text"
+										},
+										{
+											"key": "caption",
+											"value": "Caption IVE Liz Beautiful",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/isndm/Downloads/liz_mama2023.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "127.0.0.1:8080/photos",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"photos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "photoUpdate",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjksImVtYWlsIjoiaXNuZG16QGdtYWlsLmNvbSIsImlkIjozLCJ1c2VybmFtZSI6ImlzbmFuZGFtejk4In0.OTEAepPGaQCwi5bySprj9JNoP3uwmBMDibI8125JO2c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Update liz 4",
+											"type": "text"
+										},
+										{
+											"key": "caption",
+											"value": "Update Caption liz 4",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/isndm/Downloads/liz_mama2023.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "127.0.0.1:8080/photos/8",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"photos",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "photoDelete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjksImVtYWlsIjoiaXNuZG16QGdtYWlsLmNvbSIsImlkIjozLCJ1c2VybmFtZSI6ImlzbmFuZGFtejk4In0.OTEAepPGaQCwi5bySprj9JNoP3uwmBMDibI8125JO2c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:8080/photos/8",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"photos",
+										"8"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Comment",
+					"item": [
+						{
+							"name": "commentGetAll",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjksImVtYWlsIjoiaXNuZG16QGdtYWlsLmNvbSIsImlkIjozLCJ1c2VybmFtZSI6ImlzbmFuZGFtejk4In0.OTEAepPGaQCwi5bySprj9JNoP3uwmBMDibI8125JO2c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:8080/comments",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "commentGet",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:8080/comments/1",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"comments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "commentPost",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjksImVtYWlsIjoiaXNuZG16QGdtYWlsLmNvbSIsImlkIjozLCJ1c2VybmFtZSI6ImlzbmFuZGFtejk4In0.OTEAepPGaQCwi5bySprj9JNoP3uwmBMDibI8125JO2c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"message\": \"test comment 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:8080/comments/9",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"comments",
+										"9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "commentUpdate",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjksImVtYWlsIjoiaXNuZG16QGdtYWlsLmNvbSIsImlkIjozLCJ1c2VybmFtZSI6ImlzbmFuZGFtejk4In0.OTEAepPGaQCwi5bySprj9JNoP3uwmBMDibI8125JO2c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"message\": \"update comment 1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:8080/comments/2",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"comments",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "commentDelete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjksImVtYWlsIjoiaXNuZG16QGdtYWlsLmNvbSIsImlkIjozLCJ1c2VybmFtZSI6ImlzbmFuZGFtejk4In0.OTEAepPGaQCwi5bySprj9JNoP3uwmBMDibI8125JO2c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:8080/comments/3",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"comments",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Social Media",
+					"item": [
+						{
+							"name": "socmedGetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:8080/socmed",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"socmed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "socmedGet",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:8080/socmed/1",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"socmed",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "socmedAdd",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:8080/socmed",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"socmed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "socmedUpdate",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:8080/socmed/1",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"socmed",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "socmedDelete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:8080/socmed/1",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"socmed",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Get Employee",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/employees",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Nanda",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "23",
+							"type": "text"
+						},
+						{
+							"key": "division",
+							"value": "DDB",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/employee",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Car",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"brand\": \"Daihatsu\",\r\n    \"name\": \"Xenia\",\r\n    \"userid\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/cars",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Car",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/cars",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateCar",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"brand\": \"Daihatsu\",\r\n    \"name\": \"Xenia1\",\r\n    \"userid\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/cars/1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"cars",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
