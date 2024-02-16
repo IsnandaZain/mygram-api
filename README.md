@@ -7,7 +7,7 @@ Order API yang digunakan untuk mengelola Order
 - login
   
 ## Photo
-- get all
+- get all [disini](Get-All-Photo)
 - get one
 - create photo
 - update photo
