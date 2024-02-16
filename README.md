@@ -11,5 +11,5 @@ go run main.go
 
 # Postman Collection
 ```
-[https://github.com/geadalfa/Project-MyGram/blob/master/MyGram.postman_collection.json](https://github.com/IsnandaZain/mygram-api/blob/main/mygram.postman_collection)https://github.com/IsnandaZain/mygram-api/blob/main/mygram.postman_collection
+https://github.com/IsnandaZain/mygram-api/blob/main/mygram.postman_collection
 ```
