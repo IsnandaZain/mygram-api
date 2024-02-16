@@ -12,6 +12,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// GetAllSocmed godoc
+// @Summary Get All Socmed from user
+// @Description Get All Socmed from user
+// @Tags socmeds
+// @Accept json
+// @Produce json
+// @Success 200 {object} models.SocialMedia
+// @Router /socmed [get]
 func SocmedGetAll(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -35,6 +43,15 @@ func SocmedGetAll(c *gin.Context) {
 	})
 }
 
+// GetSocmed godoc
+// @Summary Get details socmed with given Id
+// @Description Get details socmed with given Id
+// @Tags socmeds
+// @Accept json
+// @Produce json
+// @Param Id path int true "ID for the socmed"
+// @Success 200 {object} models.SocialMedia
+// @Router /socmed/{socmedId} [get]
 func SocmedGet(c *gin.Context) {
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)
@@ -57,6 +74,15 @@ func SocmedGet(c *gin.Context) {
 	})
 }
 
+// PostSocmed godoc
+// @Summary Add socmed for specific user
+// @Description Add socmed for specific user
+// @Tags socmed
+// @Accept json
+// @Produce json
+// @Param models.SocialMedia body models.SocialMedia true "create social media"
+// @Success 200 {object} models.SocialMedia
+// @Router /socmed [post]
 func PostSocmed(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -94,6 +120,15 @@ func PostSocmed(c *gin.Context) {
 	c.JSON(http.StatusCreated, newSocmed)
 }
 
+// UpdateSocmed godoc
+// @Summary Update socmed for a given Id
+// @Description Update socmed corresponding to the input Id
+// @Tags socmed
+// @Accept json
+// @Produce json
+// @Param models.SocialMedia body models.SocialMedia true "update social media"
+// @Success 200 {object} models.SocialMedia
+// @Router /socmed/{socmedId} [put]
 func UpdateSocmed(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -142,6 +177,15 @@ func UpdateSocmed(c *gin.Context) {
 	})
 }
 
+// DeleteSocmed godoc
+// @Summary Delete socmed for a given Id
+// @Description Delete socmed corresponding to the param Id
+// @Tags socmed
+// @Accept json
+// @Produce json
+// @Param Id path int tru "ID for the socmed"
+// @Success 200 "{'message': 'socmed has been deleted'}"
+// @Router /socmed/{socmedId} [delete]
 func DeleteSocmed(c *gin.Context) {
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)

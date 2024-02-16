@@ -13,6 +13,15 @@ var (
 	appJSON = "application/json"
 )
 
+// RegisterUser godoc
+// @Summary register new user
+// @Description register new user
+// @Tags users
+// @Accept json
+// @Produce json
+// @Param models.User body models.User true "create user"
+// @Success 200 {object} models.User
+// @Router /users/register [post]
 func UserRegister(c *gin.Context) {
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)
@@ -42,6 +51,15 @@ func UserRegister(c *gin.Context) {
 	})
 }
 
+// LoginUser godoc
+// @Summary login user
+// @Description login user
+// @Tags users
+// @Accept json
+// @Produce json
+// @Param models.User body models.User true "create user"
+// @Success 200 {object} models.User
+// @Router /users/login [post]
 func UserLogin(c *gin.Context) {
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)

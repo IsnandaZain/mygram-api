@@ -12,13 +12,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// GetAllComment godoc
+// @Summary Get All Comment from user
+// @Description Get All Comment from user
+// @Tags comments
+// @Accept json
+// @Produce json
+// @Success 200 {object} models.Comment
+// @Router /comments [get]
 func CommentGetAll(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
 	contentType := helpers.GetContentType(c)
 	_, _ = db, contentType
 
-	comments := models.Comment{}
+	comments := []models.Comment{}
 	userId := uint(userData["id"].(float64))
 	err := db.Preload("User").Preload("Photo").Find(&comments, "user_id=?", userId).Error
 
@@ -36,12 +44,21 @@ func CommentGetAll(c *gin.Context) {
 
 }
 
+// GetComment godoc
+// @Summary Get all comment for photo
+// @Description Get all comment for photo
+// @Tags comments
+// @Accept json
+// @Produce json
+// @Param Id path int true "ID for the photo"
+// @Success 200 {object} models.Comment
+// @Router /comments/{photoId} [get]
 func CommentGet(c *gin.Context) {
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)
 	_, _ = db, contentType
 
-	comment := models.Comment{}
+	comment := []models.Comment{}
 	photoId, _ := strconv.Atoi(c.Param("photoId"))
 
 	err := db.Preload("User").Preload("Photo").First(&comment, "photo_id = ?", photoId).Error
@@ -58,6 +75,15 @@ func CommentGet(c *gin.Context) {
 	})
 }
 
+// PostComment godoc
+// @Summary Post comment for specific photo
+// @Description Post comment for specific photo
+// @Tags comments
+// @Accept json
+// @Produce json
+// @Param models.Comment body models.Comment true "create comment"
+// @Success 200 {object} models.Comment
+// @Router /comments [post]
 func PostComment(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -102,6 +128,15 @@ func PostComment(c *gin.Context) {
 	c.JSON(http.StatusCreated, newComment)
 }
 
+// UpdateComment godoc
+// @Summary Update comment for a given Id
+// @Description Update comment corresponding to the input Id
+// @Tags comments
+// @Accept json
+// @Produce json
+// @Param models.Comment body models.Comment true "update comemnt"
+// @Success 200 {object} models.Comment
+// @Router /comments/{commentId} [put]
 func UpdateComment(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -156,6 +191,15 @@ func UpdateComment(c *gin.Context) {
 	})
 }
 
+// DeleteComment godoc
+// @Summary Delete comment for a given Id
+// @Description Delete comment corresponding to the param Id
+// @Tags comments
+// @Accept json
+// @Produce json
+// @Param Id path int tru "ID for the comment"
+// @Success 200 "{'message': 'Comment has been deleted'}"
+// @Router /comments/{commentId} [delete]
 func DeleteComment(c *gin.Context) {
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)

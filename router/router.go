@@ -5,8 +5,20 @@ import (
 	"mygram-api/middlewares"
 
 	"github.com/gin-gonic/gin"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// @title MyGram API
+// @version 1.0
+// @description This is a simple service for Manage Photo and Comment
+// @termOfService https://swagger.io/terms
+// @contact.name API Support
+// @contact.email soberkoder@swagger.io
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/
+// @host localhost:8080
+// @BasePath /
 func StartApp() *gin.Engine {
 	r := gin.Default()
 
@@ -48,6 +60,8 @@ func StartApp() *gin.Engine {
 		socmedRouter.PUT("/:socmedId", middlewares.SocmedAuthorization(), controllers.UpdateSocmed)
 		socmedRouter.DELETE("/:socmedId", middlewares.SocmedAuthorization(), controllers.DeleteSocmed)
 	}
+
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	return r
 }

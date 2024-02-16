@@ -14,6 +14,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// GetAllPhoto godoc
+// @Summary Get All Photo from user
+// @Description Get All Photo from user
+// @Tags photos
+// @Accept json
+// @Produce json
+// @Success 200 {object} models.Photo
+// @Router /photos [get]
 func PhotoGetAll(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -37,6 +45,15 @@ func PhotoGetAll(c *gin.Context) {
 	})
 }
 
+// GetPhoto godoc
+// @Summary Get photo details
+// @Description Get details of one photo
+// @Tags photos
+// @Accept json
+// @Produce json
+// @Param Id path int true "ID for the photo"
+// @Success 200 {object} models.Photo
+// @Router /photos/{photoId} [get]
 func PhotoGet(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -69,6 +86,15 @@ func PhotoGet(c *gin.Context) {
 	})
 }
 
+// PostPhoto godoc
+// @Summary Post photo
+// @Description Post photo by input user
+// @Tags photos
+// @Accept json
+// @Produce json
+// @Param models.Photo body models.Photo true "create photo"
+// @Success 200 {object} models.Photo
+// @Router /photos [post]
 func UploadPhoto(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -131,6 +157,15 @@ func UploadPhoto(c *gin.Context) {
 	c.JSON(http.StatusCreated, photo)
 }
 
+// UpdatePhoto godoc
+// @Summary Update photo for a given Id
+// @Description Update detail of photo corresponding to the input Id
+// @Tags photos
+// @Accept json
+// @Produce json
+// @Param models.Photo body models.Photo true "update photo"
+// @Success 200 {object} models.Photo
+// @Router /photos [put]
 func UpdatePhoto(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -195,6 +230,15 @@ func UpdatePhoto(c *gin.Context) {
 	})
 }
 
+// DeletePhoto godoc
+// @Summary Delete photo for a given Id
+// @Description Delete photo corresponding to the param Id
+// @Tags photos
+// @Accept json
+// @Produce json
+// @Param Id path int tru "ID for the photo"
+// @Success 200 "{'message': 'Photo has been deleted'}"
+// @Router /photos/{photoId} [delete]
 func DeletePhoto(c *gin.Context) {
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)
