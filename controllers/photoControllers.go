@@ -6,7 +6,9 @@ import (
 	"mygram-api/helpers"
 	"mygram-api/models"
 	"net/http"
+	"os"
 	"strconv"
+	"strings"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -18,9 +20,9 @@ func PhotoGetAll(c *gin.Context) {
 	contentType := helpers.GetContentType(c)
 	_, _ = db, contentType
 
-	photos := models.Photo{}
+	photos := []models.Photo{}
 	userId := uint(userData["id"].(float64))
-	err := db.Find(&photos, "user_id=?", userId).Error
+	err := db.Preload("Comments").Preload("User").Find(&photos, "user_id=?", userId).Error
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
@@ -50,10 +52,7 @@ func PhotoGet(c *gin.Context) {
 		c.ShouldBind(&photo)
 	}
 
-	photo.UserID = userId
-	photo.ID = uint(photoId)
-
-	err := db.First(&photo, "id = ?", photoId).Error
+	err := db.Preload("Comments").Preload("User").First(&photo, "id=?", photoId).Error
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
 			"error_status":  "Photo not found",
@@ -61,6 +60,9 @@ func PhotoGet(c *gin.Context) {
 		})
 		return
 	}
+
+	photo.UserID = userId
+	photo.ID = uint(photoId)
 
 	c.JSON(http.StatusOK, gin.H{
 		"photo": photo,
@@ -129,10 +131,106 @@ func UploadPhoto(c *gin.Context) {
 	c.JSON(http.StatusCreated, photo)
 }
 
-// func UpdatePhoto(c *gin.Context) {
+func UpdatePhoto(c *gin.Context) {
+	db := database.GetDB()
+	userData := c.MustGet("userData").(jwt.MapClaims)
+	contentType := helpers.GetContentType(c)
+	_, _ = db, contentType
 
-// }
+	photoUpdate := models.Photo{}
+	userId := uint(userData["id"].(float64))
+	photoId, _ := strconv.Atoi(c.Param("photoId"))
+	title := c.PostForm("title")
+	caption := c.PostForm("caption")
 
-// func DeletePhoto(c *gin.Context) {
+	// update
+	photoUpdate.Title = title
+	photoUpdate.Caption = caption
 
-// }
+	// make sure photo exist
+	var photo models.Photo
+	err := db.First(&photo, "id=?", photoId).Error
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
+			"error_status":  "Data not found",
+			"error_message": fmt.Sprintf("photo with id %v not found", photoId),
+		})
+		return
+	}
+
+	// process file
+	photoFile, errFile := c.FormFile("photo")
+	var photoUrl string
+	if errFile == nil { // terdapat foto
+		// generate and save photoFile
+		photoUrl, err = helpers.SaveFile(photoFile, c)
+
+		// delete file lama
+		_ = os.Remove("upload/" + strings.Split(photo.PhotoUrl, "/")[2])
+	} else {
+		photoUrl = photo.PhotoUrl
+	}
+
+	// update photo
+	db.Model(&photo).Where("id=?", photoId).Updates(models.Photo{
+		Title:    photoUpdate.Title,
+		Caption:  photoUpdate.Caption,
+		PhotoUrl: photoUrl,
+	})
+
+	// redefine
+	photoUpdate.UserID = userId
+	photoUpdate.PhotoUrl = photoUrl
+
+	// generate data user
+	user := models.User{}
+	user.ID = uint(userData["id"].(float64))
+	user.Username = string(userData["username"].(string))
+	user.Email = string(userData["email"].(string))
+	user.Age = uint(userData["age"].(float64))
+	photoUpdate.User = &user
+
+	c.JSON(http.StatusCreated, gin.H{
+		"photo": photoUpdate,
+	})
+}
+
+func DeletePhoto(c *gin.Context) {
+	db := database.GetDB()
+	contentType := helpers.GetContentType(c)
+	_, _ = db, contentType
+
+	photoId, _ := strconv.Atoi(c.Param("photoId"))
+	photo := models.Photo{}
+
+	err := db.First(&photo, "id=?", uint(photoId)).Error
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"error_status":  "Data not found",
+			"error_message": fmt.Sprintf("photo with id %v not found", photoId),
+		})
+		return
+	}
+
+	// delete comment first
+	var comments models.Comment
+	err = db.First(&comments, "photo_id=?", photoId).Error
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"error_status":  fmt.Sprintf("failed to process data with id %v", photoId),
+			"error_message": fmt.Sprintf("failed to process data with id %v", photoId),
+		})
+		return
+	}
+
+	// delete
+	db.Delete(&comments)
+	db.Delete(&photo)
+
+	// delete file
+	_ = os.Remove("upload/" + strings.Split(photo.PhotoUrl, "/")[2])
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": fmt.Sprintf("photo with id %v has been deleted", photoId),
+	})
+}

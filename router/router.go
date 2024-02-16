@@ -24,8 +24,8 @@ func StartApp() *gin.Engine {
 		photoRouter.GET("/", controllers.PhotoGetAll)
 		photoRouter.GET("/:photoId", middlewares.PhotoAuthorization(), controllers.PhotoGet)
 		photoRouter.POST("/", controllers.UploadPhoto)
-		// photoRouter.PUT("/:photoId", controllers.UpdatePhoto)
-		// photoRouter.DELETE("/:photoId", controllers.DeletePhoto)
+		photoRouter.PUT("/:photoId", controllers.UpdatePhoto)
+		photoRouter.DELETE("/:photoId", controllers.DeletePhoto)
 	}
 
 	// Comment
