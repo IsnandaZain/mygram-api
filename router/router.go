@@ -61,6 +61,7 @@ func StartApp() *gin.Engine {
 		socmedRouter.DELETE("/:socmedId", middlewares.SocmedAuthorization(), controllers.DeleteSocmed)
 	}
 
+	r.GET("/fileUpload/:filename", controllers.GetFileUpload)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	return r
