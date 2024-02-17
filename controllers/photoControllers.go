@@ -258,7 +258,7 @@ func DeletePhoto(c *gin.Context) {
 
 	// delete comment first
 	var comments models.Comment
-	err = db.First(&comments, "photo_id=?", photoId).Error
+	err = db.Find(&comments, "photo_id=?", photoId).Error
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"error_status":  fmt.Sprintf("failed to process data with id %v", photoId),
